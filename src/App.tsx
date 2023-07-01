@@ -1,10 +1,7 @@
-import Sample from './components/sample';
+import Router from './router';
 
-/**
- * This is the entry point of the App, feel free to
- * modify this file as you want!
- *
- */
-const App = () => <Sample />;
+const App = () => {
+	return <Router />;
+};
 
 export default App;
