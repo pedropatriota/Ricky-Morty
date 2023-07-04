@@ -27,10 +27,13 @@ const Home = () => {
 			<Filter
 				filter={select}
 				handleChange={handleChange}
-				handleFilter={(value)=>handleSelect(value,'gender')}
+				handleFilterGender={(value)=>handleSelect(value,'gender')}
+				handleFilterStatus={(value)=>handleSelect(value,'status')}
 				value={inputValue}
-				options={genderOptions}
-				placeholder='Select a gender...'
+				optionsGender={genderOptions}
+				optionsStatus={statusOptions}
+				placeholderGender='Select a gender...'
+				placeholderStatus='Select a status...'
 			/>			
 			
 			<List allData={allData} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>

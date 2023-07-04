@@ -6,8 +6,8 @@ export interface IFormProps extends InputHTMLAttributes<HTMLInputElement> {
 	handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
 }
 
-const Input = ({ value, handleChange }: IFormProps) => {
-	return <InputEl type="text" value={value} onChange={handleChange} />;
+const Input = ({ value, handleChange, ...rest }: IFormProps) => {
+	return <InputEl type="text" value={value} onChange={handleChange} {...rest} />;
 };
 
 export default Input;

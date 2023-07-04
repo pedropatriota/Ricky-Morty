@@ -12,12 +12,22 @@ const Filter = ({
 }: IDropdownProps & IFormProps) => {
 	return (
 		<Container>
-			<Input value={value} handleChange={handleChange} />
+			<Input
+				value={value}
+				handleChange={handleChange}
+				placeholder="type a name..."
+			/>
 			<Dropdown
 				filter={filter}
 				options={options}
 				handleFilter={handleFilter}
-				placeholder={<span>{placeholder}</span>}
+				placeholder={placeholder}
+			/>
+			<Dropdown
+				filter={filter}
+				options={options}
+				handleFilter={handleFilter}
+				placeholder={placeholder}
 			/>
 		</Container>
 	);
