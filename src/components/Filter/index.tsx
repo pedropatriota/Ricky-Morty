@@ -7,12 +7,18 @@ const Filter = ({
 	handleChange,
 	filter,
 	options,
-	handleFilter
+	handleFilter,
+	placeholder
 }: IDropdownProps & IFormProps) => {
 	return (
 		<Container>
 			<Input value={value} handleChange={handleChange} />
-			<Dropdown filter={filter} options={options} handleFilter={handleFilter} />
+			<Dropdown
+				filter={filter}
+				options={options}
+				handleFilter={handleFilter}
+				placeholder={<span>{placeholder}</span>}
+			/>
 		</Container>
 	);
 };

@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 interface FetcherProps {
 	url: string;
 	method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -8,6 +6,11 @@ interface FetcherProps {
 export interface getRequestProps {
 	resource?: 'character' | 'location' | 'episode';
 	id?: number;
+	filters?: {
+		name: string;
+		gender: 'Male' | 'Female' | 'Unknown' | string;
+		status: 'Alive' | 'Dead' | 'Unknown' | string;
+	};
 }
 
 export const baseUrl: string = 'https://rickandmortyapi.com/api';
@@ -17,7 +20,8 @@ export const fetcher = async ({ url, method = 'GET', bodyInfo }: FetcherProps) =
 		method,
 		body: bodyInfo && JSON.stringify(bodyInfo),
 		headers: {
-			'Content-Type': 'application/json'
+			accept: 'application/json',
+			'User-agent': 'learning app'
 		}
 	};
 

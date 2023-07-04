@@ -4,31 +4,41 @@ import { SingleValue } from 'react-select';
 
 const useHome = () => {
 	const RESOURCE = 'character';
-	const { allData, fetchNextPage, hasNextPage, isLoading, isError, error } =
-		useLoadMoreAllData({
-			resource: RESOURCE
-		});
-
 	const [filters, setFilters] = useState<{
 		name: string;
-		region: string;
-	}>({ name: '', region: '' });
+		gender: 'Male' | 'Female' | 'Unknown' | string;
+		status: 'Alive' | 'Dead' | 'Unknown' | string;
+	}>({ name: '', gender: '', status: '' });
+
+	const { allData, fetchNextPage, hasNextPage, isLoading, isError, error } =
+		useLoadMoreAllData({
+			resource: RESOURCE,
+			filters
+		});
 
 	const [inputValue, setInputValue] = useState('');
 
-	const [select, setSelect] = useState<SingleValue<{ label: string; value: string }>>({
-		label: '',
-		value: ''
+	const [select, setSelect] = useState<
+		SingleValue<{ label: string | null; value: string | null }>
+	>({
+		label: null,
+		value: null
 	});
 
-	const options = useMemo(
+	const genderOptions = useMemo(
 		() => [
-			{ label: 'Africa', value: 'Africa' },
-			{ label: 'Americas', value: 'Americas' },
-			{ label: 'Antarctic', value: 'Antarctic' },
-			{ label: 'Asia', value: 'Asia' },
-			{ label: 'Europe', value: 'Europe' },
-			{ label: 'Oceania', value: 'Oceania' }
+			{ label: 'Female', value: 'Female' },
+			{ label: 'Male', value: 'Male' },
+			{ label: 'Unknown', value: 'unknown' }
+		],
+		[]
+	);
+
+	const statusOptions = useMemo(
+		() => [
+			{ label: 'Alive', value: 'Alive' },
+			{ label: 'Dead', value: 'Dead' },
+			{ label: 'Unknown', value: 'unknown' }
 		],
 		[]
 	);
@@ -39,10 +49,13 @@ const useHome = () => {
 	};
 
 	const handleSelect = useCallback(
-		(newValue: SingleValue<{ label: string; value: string }> | any) => {
+		(
+			newValue: SingleValue<{ label: string; value: string }> | any,
+			propertyName: string
+		) => {
 			setSelect(newValue);
 			startTransition(() =>
-				setFilters({ ...filters, region: newValue?.value as string })
+				setFilters({ ...filters, [propertyName]: newValue?.value as string })
 			);
 		},
 		[filters]
@@ -56,7 +69,8 @@ const useHome = () => {
 		isError,
 		resource: RESOURCE,
 		error,
-		options,
+		genderOptions,
+		statusOptions,
 		inputValue,
 		handleChange,
 		handleSelect,

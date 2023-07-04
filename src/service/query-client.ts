@@ -3,7 +3,7 @@ import { QueryCache, QueryClient, MutationCache } from 'react-query';
 const queryErrorHandler = (error: unknown): void => {
 	const title = error instanceof Error ? error.message : 'error connecting to server';
 
-	throw new Error(title);
+	console.log(title);
 };
 
 export const queryClient = new QueryClient({
@@ -13,9 +13,4 @@ export const queryClient = new QueryClient({
 	mutationCache: new MutationCache({
 		onError: queryErrorHandler
 	})
-	// defaultOptions: {
-	// 	queries: {
-	// 		notifyOnChangeProps: 'tracked'
-	// 	}
-	// }
 });

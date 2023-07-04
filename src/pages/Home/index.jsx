@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import useHome from './use-home';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Character, Filter } from '../../components';
+import { Character, Filter, List } from '../../components';
 
 const Home = () => {
 	const {
@@ -14,29 +15,25 @@ const Home = () => {
 		inputValue,
 		handleChange,
 		handleSelect,
-		options
+		genderOptions,
+		statusOptions,
 	} = useHome();
 
 	if (isLoading) return <div>Loading...</div>;
-	if (isError) return <div>{(error as any)?.toString()}</div>;
+	if (isError) return <div>{(error)?.toString()}</div>;
 
 	return (
 		<>
 			<Filter
 				filter={select}
 				handleChange={handleChange}
-				handleFilter={handleSelect}
+				handleFilter={(value)=>handleSelect(value,'gender')}
 				value={inputValue}
-				options={options}
-			/>
-
-			<InfiniteScroll loadMore={() => fetchNextPage()} hasMore={hasNextPage}>
-				{allData.pages.map(({ results }) =>
-					results.map(({ id, ...props }: any) => (
-						<Character key={id} {...props} />
-					))
-				)}
-			</InfiniteScroll>
+				options={genderOptions}
+				placeholder='Select a gender...'
+			/>			
+			
+			<List allData={allData} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
 		</>
 	);
 };

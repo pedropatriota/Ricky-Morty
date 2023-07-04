@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Card from '../Card';
 
 // import { Container } from './styles';
 
@@ -9,30 +10,21 @@ interface CharacterProps {
 	status: string;
 	gender: string;
 	image: string;
-	resource: string;
 }
 
-const Character = ({
-	id,
-	name,
-	species,
-	status,
-	gender,
-	image,
-	resource
-}: CharacterProps) => {
+const Character = ({ id, name, species, status, gender, image }: CharacterProps) => {
 	return (
-		<Link to={`/${id}`}>
-			<div>
-				<img src={image} alt={name} />
-				<div>
-					<h2>{name}</h2>
-					<span>
-						<strong>status:</strong> {status} | <strong>specie:</strong>{' '}
-						{species} | <strong>gender:</strong> {gender}
-					</span>
-				</div>
-			</div>
+		<Link
+			to={`/${id}`}
+			style={{ textDecoration: 'none', width: 'fit-content', display: 'block' }}
+		>
+			<Card
+				name={name}
+				image={image}
+				species={species}
+				status={status}
+				gender={gender}
+			/>
 		</Link>
 	);
 };
