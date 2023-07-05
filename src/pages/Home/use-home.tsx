@@ -2,6 +2,11 @@ import { startTransition, useCallback, useMemo, useState } from 'react';
 import { useLoadMoreAllData } from '../../service/hooks';
 import { SingleValue } from 'react-select';
 
+interface ISelect {
+	gender: SingleValue<{ label: string | null; value: string | null }>;
+	status: SingleValue<{ label: string | null; value: string | null }>;
+}
+
 const useHome = () => {
 	const RESOURCE = 'character';
 	const [filters, setFilters] = useState<{
@@ -18,11 +23,9 @@ const useHome = () => {
 
 	const [inputValue, setInputValue] = useState('');
 
-	const [select, setSelect] = useState<
-		SingleValue<{ label: string | null; value: string | null }>
-	>({
-		label: null,
-		value: null
+	const [select, setSelect] = useState<ISelect>({
+		gender: { label: null, value: null },
+		status: { label: null, value: null }
 	});
 
 	const genderOptions = useMemo(

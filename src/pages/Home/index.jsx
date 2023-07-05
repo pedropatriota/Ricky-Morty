@@ -16,27 +16,35 @@ const Home = () => {
 		handleChange,
 		handleSelect,
 		genderOptions,
-		statusOptions,
+		statusOptions
 	} = useHome();
 
 	if (isLoading) return <div>Loading...</div>;
-	if (isError) return <div>{(error)?.toString()}</div>;
+	if (isError) return <div>{error?.toString()}</div>;
 
 	return (
 		<>
 			<Filter
-				filter={select}
+				//Input
 				handleChange={handleChange}
-				handleFilterGender={(value)=>handleSelect(value,'gender')}
-				handleFilterStatus={(value)=>handleSelect(value,'status')}
 				value={inputValue}
+				//dropdown Gender
+				filterGender={select?.gender}
+				handleFilterGender={value => handleSelect(value, 'gender')}
 				optionsGender={genderOptions}
+				placeholderGender="Select a gender..."
+				//dropdown Status
+				filterStatus={select?.status}
+				handleFilterStatus={value => handleSelect(value, 'status')}
 				optionsStatus={statusOptions}
-				placeholderGender='Select a gender...'
-				placeholderStatus='Select a status...'
-			/>			
-			
-			<List allData={allData} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
+				placeholderStatus="Select a status..."
+			/>
+
+			<List
+				allData={allData}
+				fetchNextPage={fetchNextPage}
+				hasNextPage={hasNextPage}
+			/>
 		</>
 	);
 };

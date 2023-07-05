@@ -27,7 +27,7 @@ export const useGetById = ({ resource, id }: getRequestProps) => {
 		}
 	);
 
-	return { DataById: data, ...params };
+	return { dataById: data, ...params };
 };
 
 const filterPropsFromCharacters = (

@@ -9,10 +9,10 @@ export const Container = styled.div`
 export const ImagContainer = styled.div<{ image: string }>`
 	background-image: url(${props => props.image});
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 	width: 100%;
-	max-width: 18rem;
-	height: 18rem;
+	max-width: min(18rem, 90vw);
+	height: min(18rem, 90vw);
 	border-radius: 1rem 1rem 0 0;
 `;
 

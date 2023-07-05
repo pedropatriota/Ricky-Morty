@@ -1,6 +1,6 @@
 import { ActionMeta, GroupBase, SingleValue } from 'react-select';
 import { ReactSelect } from './styles';
-import { ReactNode, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 type Filter = SingleValue<{ label: string; value: string }>;
 
 export interface IDropdownProps {
