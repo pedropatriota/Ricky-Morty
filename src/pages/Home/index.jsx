@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import useHome from './use-home';
-import InfiniteScroll from 'react-infinite-scroller';
-import { Character, Filter, List } from '../../components';
+import { Filter, List, Template, Order } from '../../components';
 
 const Home = () => {
 	const {
@@ -13,31 +12,29 @@ const Home = () => {
 		error,
 		select,
 		inputValue,
-		handleChange,
+		handleInputChange,
+		handleFilterGender,
+		handleFilterStatus,
 		handleSelect,
 		genderOptions,
-		statusOptions
+		statusOptions,
+		handleOrder,
+		order
 	} = useHome();
 
 	if (isLoading) return <div>Loading...</div>;
 	if (isError) return <div>{error?.toString()}</div>;
 
 	return (
-		<>
+		<Template>
+			<Order order={order} handleOrder={handleOrder} />
 			<Filter
-				//Input
-				handleChange={handleChange}
+				handleChange={handleInputChange}
+				handleFilter={[handleFilterGender, handleFilterStatus]}
 				value={inputValue}
-				//dropdown Gender
-				filterGender={select?.gender}
-				handleFilterGender={value => handleSelect(value, 'gender')}
-				optionsGender={genderOptions}
-				placeholderGender="Select a gender..."
-				//dropdown Status
-				filterStatus={select?.status}
-				handleFilterStatus={value => handleSelect(value, 'status')}
-				optionsStatus={statusOptions}
-				placeholderStatus="Select a status..."
+				filter={[select?.gender, select?.status]}
+				options={[genderOptions, statusOptions]}
+				placeholder={['Select a gender...', 'Select a status...']}
 			/>
 
 			<List
@@ -45,7 +42,7 @@ const Home = () => {
 				fetchNextPage={fetchNextPage}
 				hasNextPage={hasNextPage}
 			/>
-		</>
+		</Template>
 	);
 };
 

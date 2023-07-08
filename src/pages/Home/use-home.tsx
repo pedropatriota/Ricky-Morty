@@ -7,6 +7,8 @@ interface ISelect {
 	status: SingleValue<{ label: string | null; value: string | null }>;
 }
 
+type TOrder = 'Ascending' | 'Descending' | undefined;
+
 const useHome = () => {
 	const RESOURCE = 'character';
 	const [filters, setFilters] = useState<{
@@ -14,11 +16,13 @@ const useHome = () => {
 		gender: 'Male' | 'Female' | 'Unknown' | string;
 		status: 'Alive' | 'Dead' | 'Unknown' | string;
 	}>({ name: '', gender: '', status: '' });
+	const [order, setOrder] = useState<TOrder>();
 
 	const { allData, fetchNextPage, hasNextPage, isLoading, isError, error } =
 		useLoadMoreAllData({
 			resource: RESOURCE,
-			filters
+			filters,
+			order
 		});
 
 	const [inputValue, setInputValue] = useState('');
@@ -46,7 +50,15 @@ const useHome = () => {
 		[]
 	);
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleOrder = () => {
+		setOrder((prevOrder: TOrder): TOrder => {
+			if (!prevOrder) return 'Ascending';
+			else if (prevOrder === 'Ascending') return 'Descending';
+			else return undefined;
+		});
+	};
+
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(event.target.value);
 		startTransition(() => setFilters({ ...filters, name: event.target.value }));
 	};
@@ -75,9 +87,17 @@ const useHome = () => {
 		genderOptions,
 		statusOptions,
 		inputValue,
-		handleChange,
+		handleInputChange,
+		handleFilterGender: (
+			value: SingleValue<{ label: string; value: string }> | any
+		) => handleSelect(value, 'gender'),
+		handleFilterStatus: (
+			value: SingleValue<{ label: string; value: string }> | any
+		) => handleSelect(value, 'status'),
 		handleSelect,
-		select
+		select,
+		handleOrder,
+		order
 	};
 };
 

@@ -1,38 +1,15 @@
-import { ActionMeta, GroupBase, SingleValue } from 'react-select';
 import Dropdown from '../Dropdown';
+import type { IFilterProps } from './contracts';
 import Input, { IFormProps } from '../Input';
 import { Container } from './styles';
-
-type TFilter = SingleValue<{ label: string; value: string }>;
-
-interface IFilterProps {
-	filterGender: TFilter;
-	filterStatus: TFilter;
-	optionsGender: readonly (TFilter | GroupBase<{ label: string; value: string }>)[];
-	optionsStatus: readonly (TFilter | GroupBase<{ label: string; value: string }>)[];
-	placeholderGender: string;
-	placeholderStatus: string;
-	handleFilterGender: (
-		newValue: TFilter | unknown,
-		actionMeta: ActionMeta<TFilter | unknown>
-	) => void;
-	handleFilterStatus: (
-		newValue: TFilter | unknown,
-		actionMeta: ActionMeta<TFilter | unknown>
-	) => void;
-}
 
 const Filter = ({
 	value,
 	handleChange,
-	filterGender,
-	filterStatus,
-	optionsGender,
-	optionsStatus,
-	placeholderGender,
-	placeholderStatus,
-	handleFilterGender,
-	handleFilterStatus
+	handleFilter,
+	filter,
+	options,
+	placeholder
 }: IFilterProps & IFormProps) => {
 	return (
 		<Container>
@@ -42,16 +19,16 @@ const Filter = ({
 				placeholder="type a name..."
 			/>
 			<Dropdown
-				filter={filterGender}
-				options={optionsGender}
-				handleFilter={handleFilterGender}
-				placeholder={placeholderGender}
+				filter={filter[0]}
+				options={options[0]}
+				handleFilter={handleFilter[0]}
+				placeholder={placeholder[0]}
 			/>
 			<Dropdown
-				filter={filterStatus}
-				options={optionsStatus}
-				handleFilter={handleFilterStatus}
-				placeholder={placeholderStatus}
+				filter={filter[1]}
+				options={options[1]}
+				handleFilter={handleFilter[1]}
+				placeholder={placeholder[1]}
 			/>
 		</Container>
 	);

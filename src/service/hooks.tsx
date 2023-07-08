@@ -38,7 +38,8 @@ const filterPropsFromCharacters = (
 				gender: 'Male' | 'Female' | 'Unknown' | string;
 				status: 'Alive' | 'Dead' | 'Unknown' | string;
 		  }
-		| undefined
+		| undefined,
+	order?: 'Ascending' | 'Descending'
 ): any => {
 	const newData = data?.pages.flatMap(({ results }) => {
 		return results.map(({ ...props }) => {
@@ -55,10 +56,19 @@ const filterPropsFromCharacters = (
 			item?.status?.includes(filters?.status ?? '')
 	);
 
-	return newDataFiltered;
+	if (!order) {
+		return newDataFiltered;
+	} else if (order === 'Ascending') {
+		return newDataFiltered.sort((a, b) =>
+			a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+		);
+	} else
+		return newDataFiltered.sort((a, b) =>
+			b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+		);
 };
 
-export const useLoadMoreAllData = ({ resource, filters }: getRequestProps) => {
+export const useLoadMoreAllData = ({ resource, filters, order }: getRequestProps) => {
 	const { data, ...params } = useInfiniteQuery(
 		[queryKeys.all, resource],
 		({ pageParam = `${baseUrl}/${resource}` }) => fetcher({ url: pageParam }),
@@ -69,7 +79,7 @@ export const useLoadMoreAllData = ({ resource, filters }: getRequestProps) => {
 			getNextPageParam: lastPage => {
 				return lastPage.info.next || undefined;
 			},
-			select: data => filterPropsFromCharacters(data, filters)
+			select: data => filterPropsFromCharacters(data, filters, order)
 		}
 	);
 

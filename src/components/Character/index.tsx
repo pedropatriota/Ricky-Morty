@@ -1,18 +1,8 @@
 import { Link } from 'react-router-dom';
 import Card from '../Card';
+import type { ICharacterProps } from './contracts';
 
-// import { Container } from './styles';
-
-interface CharacterProps {
-	id: number;
-	name: string;
-	species: string;
-	status: string;
-	gender: string;
-	image: string;
-}
-
-const Character = ({ id, name, species, status, gender, image }: CharacterProps) => {
+const Character = ({ id, name, species, status, gender, image }: ICharacterProps) => {
 	return (
 		<Link
 			to={`/${id}`}

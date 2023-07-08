@@ -1,6 +1,7 @@
 import { FetchNextPageOptions, InfiniteQueryObserverResult } from 'react-query';
 import Character from '../Character';
-import { Scroller } from './styles';
+import { Frown } from 'lucide-react';
+import { Scroller, IconContainer } from './styles';
 
 type keyProps = {
 	id: number;
@@ -22,9 +23,13 @@ interface ListProps {
 const List = ({ allData, fetchNextPage, hasNextPage }: ListProps) => {
 	return (
 		<Scroller loadMore={() => fetchNextPage()} hasMore={hasNextPage}>
-			{allData?.map(({ ...props }) => (
-				<Character key={props.id} {...props} />
-			))}
+			{allData?.length > 0 ? (
+				allData?.map(({ ...props }) => <Character key={props.id} {...props} />)
+			) : (
+				<IconContainer>
+					<Frown width="10rem" height="10rem" />
+				</IconContainer>
+			)}
 		</Scroller>
 	);
 };

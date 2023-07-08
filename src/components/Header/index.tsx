@@ -18,10 +18,12 @@ export interface HeaderProps {
 
 const Header = ({ theme, toggleTheme }: HeaderProps) => {
 	return (
-		<Styled.Header onClick={toggleTheme}>
+		<Styled.Header>
 			<Styled.Container>
 				<img src={rickyMortyLogo} alt="Ricky and Morty logo" width="160px" />
-				{theme.title === 'dark' ? <MoonStar /> : <Moon />}
+				<div onClick={toggleTheme} role="button" tabIndex={0}>
+					{theme.title === 'dark' ? <MoonStar /> : <Moon />}
+				</div>
 			</Styled.Container>
 		</Styled.Header>
 	);

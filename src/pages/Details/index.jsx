@@ -1,6 +1,7 @@
 import useDetails from './useDetails';
-import { DetailList } from '../../components';
-import { renderData, transformObjectToArray } from '../../utils';
+import { DetailList, Template } from '../../components';
+import { transformObjectToArray } from '../../utils';
+import * as Styled from './styles';
 
 const Details = () => {
 	const {
@@ -29,20 +30,22 @@ const Details = () => {
 	const episodes = transformObjectToArray(dataEpisode, episodesProps);
 
 	return (
-		<>
-			<h1 style={{ marginBottom: '1.5rem' }}>{name}</h1>
-			<div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-				<div>
-					<img src={image} alt={name} />
-				</div>
+		<Template showGoBack>
+			<Styled.Title style={{ marginBottom: '1.5rem' }}>{name}</Styled.Title>
+			<Styled.InfoContainer
+				style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}
+			>
+				<Styled.GoBackIcon src={image} alt={name} />
 
 				<div>
 					<DetailList dataArr={characters} params={characterArr} />
+					<hr />
 					<DetailList dataArr={location} params={locationArr} />
+					<hr />
 					<DetailList dataArr={episodes} params={episodesArr} />
 				</div>
-			</div>
-		</>
+			</Styled.InfoContainer>
+		</Template>
 	);
 };
 

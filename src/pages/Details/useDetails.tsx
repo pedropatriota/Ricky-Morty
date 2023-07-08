@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useGetById } from '../../service/hooks';
-import { transformObjectToArray } from '../../utils';
 
 const useDetails = () => {
 	const { id } = useParams();
@@ -39,7 +38,7 @@ const useDetails = () => {
 	const locationArr = [
 		{ label: 'Dimension', value: dataLocation?.dimension },
 		{ label: 'Location', value: `${dataLocation?.type} - ${dataLocation?.name}` },
-		{ label: 'Residents', value: dataLocation?.residents.length }
+		{ label: 'Residents', value: dataLocation?.residents?.length }
 	];
 
 	const episodesArr = [
@@ -48,8 +47,7 @@ const useDetails = () => {
 			value: `${dataEpisode?.name} - ${dataEpisode?.episode}`
 		},
 		{ label: 'Date', value: dataEpisode?.air_date },
-		{ label: 'Characters', value: dataEpisode?.name },
-		{ label: 'Residents', value: dataEpisode?.characters.length }
+		{ label: 'Characters', value: dataEpisode?.characters?.length }
 	];
 
 	return {

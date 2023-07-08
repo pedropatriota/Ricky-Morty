@@ -18,4 +18,8 @@ export const Container = styled.div`
 		height: auto;
 		max-width: 10rem;
 	}
+
+	div {
+		cursor: pointer;
+	}
 `;

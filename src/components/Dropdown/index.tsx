@@ -14,25 +14,15 @@ export interface IDropdownProps {
 }
 
 const Dropdown = ({ options, handleFilter, filter, placeholder }: IDropdownProps) => {
-	const selectRef = useRef<any>(null);
-
-	useEffect(() => {
-		if (!!selectRef.current) {
-			selectRef.current.inputRef.style.minWidth = '140px';
-			selectRef.current.inputRef.placeholder = filter?.label ? '' : placeholder;
-		}
-	}, [filter?.label, placeholder]);
-
 	return (
 		<ReactSelect
-			ref={selectRef}
 			classNamePrefix="react-select"
 			options={options}
 			value={filter}
 			onChange={handleFilter}
 			autoFocus={false}
 			isClearable
-			isSearchable
+			placeholder={placeholder}
 		/>
 	);
 };

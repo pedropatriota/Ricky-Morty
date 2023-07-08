@@ -6,5 +6,9 @@ export const Scroller = styled(InfiniteScroll)`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
 	gap: 1rem;
-	padding: 0px min(5vw, 5rem);
+`;
+
+export const IconContainer = styled.div`
+	display: grid;
+	place-content: center;
 `;

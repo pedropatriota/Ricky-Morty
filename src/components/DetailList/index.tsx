@@ -1,12 +1,6 @@
 import { renderData } from '../../utils';
 import { Container } from './styles';
-
-type UnknownObject = Record<string, string>;
-
-interface IDetailListProps<T extends UnknownObject> {
-	dataArr: Array<Partial<T>>;
-	params: { label: string; value: string }[];
-}
+import type { IDetailListProps, UnknownObject } from './contracts';
 
 const DetailList = ({ dataArr, params }: IDetailListProps<UnknownObject>) => {
 	return (

@@ -11,6 +11,7 @@ export interface getRequestProps {
 		gender: 'Male' | 'Female' | 'Unknown' | string;
 		status: 'Alive' | 'Dead' | 'Unknown' | string;
 	};
+	order?: 'Ascending' | 'Descending';
 }
 
 export const baseUrl: string = 'https://rickandmortyapi.com/api';
