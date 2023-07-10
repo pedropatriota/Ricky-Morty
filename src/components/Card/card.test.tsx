@@ -1,4 +1,4 @@
-import { screen, render, within, waitFor } from '@testing-library/react';
+import { screen, render, within } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { light } from '../../styles/themes';
 import Card from '.';

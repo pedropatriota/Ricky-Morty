@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListComponent should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-fqkvVR BweYT"
+    data-testid="scroller"
+  >
+    <a
+      href="/4"
+      style="text-decoration: none; display: block;"
+    >
+      <div
+        class="sc-aXZVg bNflSf"
+        data-testid="card"
+      >
+        <div
+          class="sc-gEvEer igRMls"
+          data-testid="card-image"
+        />
+        <div
+          class="sc-eqUAAy jAJozm"
+        >
+          <h2>
+            Beth Smith
+          </h2>
+          <p>
+            <strong>
+              Status
+              : 
+            </strong>
+             
+            Alive
+          </p>
+          <p>
+            <strong>
+              Species
+              : 
+            </strong>
+             
+            Human
+          </p>
+          <p>
+            <strong>
+              Gender
+              : 
+            </strong>
+             
+            Female
+          </p>
+        </div>
+      </div>
+    </a>
+    <a
+      href="/37"
+      style="text-decoration: none; display: block;"
+    >
+      <div
+        class="sc-aXZVg bNflSf"
+        data-testid="card"
+      >
+        <div
+          class="sc-gEvEer hydhuE"
+          data-testid="card-image"
+        />
+        <div
+          class="sc-eqUAAy jAJozm"
+        >
+          <h2>
+            Beth Sanchez
+          </h2>
+          <p>
+            <strong>
+              Status
+              : 
+            </strong>
+             
+            Alive
+          </p>
+          <p>
+            <strong>
+              Species
+              : 
+            </strong>
+             
+            Human
+          </p>
+          <p>
+            <strong>
+              Gender
+              : 
+            </strong>
+             
+            Female
+          </p>
+        </div>
+      </div>
+    </a>
+    <a
+      href="/38"
+      style="text-decoration: none; display: block;"
+    >
+      <div
+        class="sc-aXZVg bNflSf"
+        data-testid="card"
+      >
+        <div
+          class="sc-gEvEer hPXxUj"
+          data-testid="card-image"
+        />
+        <div
+          class="sc-eqUAAy jAJozm"
+        >
+          <h2>
+            Beth Smith
+          </h2>
+          <p>
+            <strong>
+              Status
+              : 
+            </strong>
+             
+            Alive
+          </p>
+          <p>
+            <strong>
+              Species
+              : 
+            </strong>
+             
+            Human
+          </p>
+          <p>
+            <strong>
+              Gender
+              : 
+            </strong>
+             
+            Female
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+`;

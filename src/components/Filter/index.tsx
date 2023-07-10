@@ -9,7 +9,7 @@ const Filter = ({
 	handleFilter,
 	filter,
 	options,
-	placeholder
+	label
 }: IFilterProps & IFormProps) => {
 	return (
 		<Container>
@@ -22,13 +22,13 @@ const Filter = ({
 				filter={filter[0]}
 				options={options[0]}
 				handleFilter={handleFilter[0]}
-				placeholder={placeholder[0]}
+				label={label[0]}
 			/>
 			<Dropdown
 				filter={filter[1]}
 				options={options[1]}
 				handleFilter={handleFilter[1]}
-				placeholder={placeholder[1]}
+				label={label[1]}
 			/>
 		</Container>
 	);

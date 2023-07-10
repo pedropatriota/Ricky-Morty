@@ -15,7 +15,6 @@ const Home = () => {
 		handleInputChange,
 		handleFilterGender,
 		handleFilterStatus,
-		handleSelect,
 		genderOptions,
 		statusOptions,
 		handleOrder,
@@ -34,7 +33,7 @@ const Home = () => {
 				value={inputValue}
 				filter={[select?.gender, select?.status]}
 				options={[genderOptions, statusOptions]}
-				placeholder={['Select a gender...', 'Select a status...']}
+				label={['gender', 'status']}
 			/>
 
 			<List

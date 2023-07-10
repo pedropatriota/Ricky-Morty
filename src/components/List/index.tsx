@@ -1,33 +1,20 @@
-import { FetchNextPageOptions, InfiniteQueryObserverResult } from 'react-query';
 import Character from '../Character';
 import { Frown } from 'lucide-react';
+import { ListProps } from './contracts';
 import { Scroller, IconContainer } from './styles';
-
-type keyProps = {
-	id: number;
-	name: string;
-	species: string;
-	status: string;
-	gender: string;
-	image: string;
-};
-
-interface ListProps {
-	allData: keyProps[];
-	fetchNextPage: (
-		options?: FetchNextPageOptions | undefined
-	) => Promise<InfiniteQueryObserverResult<any, unknown>>;
-	hasNextPage?: boolean;
-}
 
 const List = ({ allData, fetchNextPage, hasNextPage }: ListProps) => {
 	return (
-		<Scroller loadMore={() => fetchNextPage()} hasMore={hasNextPage}>
+		<Scroller
+			loadMore={() => fetchNextPage()}
+			hasMore={hasNextPage}
+			data-testid="scroller"
+		>
 			{allData?.length > 0 ? (
 				allData?.map(({ ...props }) => <Character key={props.id} {...props} />)
 			) : (
 				<IconContainer>
-					<Frown width="10rem" height="10rem" />
+					<Frown width="10rem" height="10rem" data-testid="icon-emptyList" />
 				</IconContainer>
 			)}
 		</Scroller>

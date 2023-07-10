@@ -52,7 +52,17 @@ describe('Header', () => {
 
 		fireEvent.click(toggleThemeBtn);
 
-		expect(toggleTheme).toHaveBeenCalled();
+		expect(toggleTheme).toHaveBeenCalledTimes(1);
+
+		render(
+			<ThemeProvider theme={dark}>
+				<Header toggleTheme={toggleTheme} theme={dark} />
+			</ThemeProvider>
+		);
+
+		const darkSvg = (await screen.findByTestId('icon-dark')) as HTMLElement;
+
+		expect(darkSvg).toBeInTheDocument();
 	});
 
 	it('should match the snapshot', () => {
