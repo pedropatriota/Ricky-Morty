@@ -28,8 +28,8 @@ const useHome = () => {
 	const [inputValue, setInputValue] = useState('');
 
 	const [select, setSelect] = useState<ISelect>({
-		gender: { label: null, value: null },
-		status: { label: null, value: null }
+		gender: { label: '', value: null },
+		status: { label: '', value: null }
 	});
 
 	const genderOptions = useMemo(
@@ -59,6 +59,7 @@ const useHome = () => {
 	};
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		event.preventDefault();
 		setInputValue(event.target.value);
 		startTransition(() => setFilters({ ...filters, name: event.target.value }));
 	};

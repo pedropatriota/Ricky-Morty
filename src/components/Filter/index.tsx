@@ -1,6 +1,6 @@
 import Dropdown from '../Dropdown';
 import type { IFilterProps } from './contracts';
-import Input, { IFormProps } from '../Input';
+import { Input, IFormProps } from '../Input';
 import { Container } from './styles';
 
 const Filter = ({

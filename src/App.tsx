@@ -11,7 +11,7 @@ import { Header } from './components';
 const App = () => {
 	const [theme, setTheme] = useState(light);
 
-	const toggleTheme = useCallback((): void => {
+	const toggleTheme = useCallback(() => {
 		setTheme(theme.title === 'light' ? dark : light);
 	}, [theme.title]);
 

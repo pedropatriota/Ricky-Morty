@@ -1,20 +1,7 @@
 import * as Styled from './styles';
 import rickyMortyLogo from './RickAndMortyLogo.png';
 import { Moon, MoonStar } from 'lucide-react';
-
-export interface HeaderProps {
-	theme: {
-		title: string;
-		colors: {
-			bg: string;
-			el: string;
-			text: string;
-			input: string;
-			border: string;
-		};
-	};
-	toggleTheme: () => void;
-}
+import { HeaderProps } from './contracts';
 
 const Header = ({ theme, toggleTheme }: HeaderProps) => {
 	return (
@@ -22,7 +9,11 @@ const Header = ({ theme, toggleTheme }: HeaderProps) => {
 			<Styled.Container>
 				<img src={rickyMortyLogo} alt="Ricky and Morty logo" width="160px" />
 				<div onClick={toggleTheme} role="button" tabIndex={0}>
-					{theme.title === 'dark' ? <MoonStar /> : <Moon />}
+					{theme.title === 'dark' ? (
+						<MoonStar data-testid="icon-dark" />
+					) : (
+						<Moon data-testid="icon-light" />
+					)}
 				</div>
 			</Styled.Container>
 		</Styled.Header>

@@ -1,13 +1,8 @@
-import { InputHTMLAttributes } from 'react';
 import { Input as InputEl } from './styles';
-
-export interface IFormProps extends InputHTMLAttributes<HTMLInputElement> {
-	value: string;
-	handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
-}
+import type { IFormProps } from './contracts';
 
 const Input = ({ value, handleChange, ...rest }: IFormProps) => {
 	return <InputEl type="text" value={value} onChange={handleChange} {...rest} />;
 };
 
-export default Input;
+export { Input, IFormProps };
