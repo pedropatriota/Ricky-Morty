@@ -41,9 +41,9 @@ describe('Input', () => {
 		// Assertion to make sure that input value is the same that was typed before
 		expect(input.value).toBe('Rick');
 	});
-});
 
-it('should match the snapshot', () => {
-	const { container } = setup();
-	expect(container).toMatchSnapshot();
+	it('should match the snapshot', () => {
+		const { container } = setup();
+		expect(container).toMatchSnapshot();
+	});
 });

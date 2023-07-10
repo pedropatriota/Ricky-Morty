@@ -1,4 +1,4 @@
-import { screen, render, within, fireEvent } from '@testing-library/react';
+import { screen, render, within, fireEvent, cleanup } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { light, dark } from '../../styles/themes';
 import Header from '.';
@@ -18,6 +18,8 @@ const setup = () => {
 		...utils
 	};
 };
+
+afterEach(cleanup);
 
 describe('Header', () => {
 	const toggleThemeMocked = jest.fn();

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-aXZVg bNflSf"
+    data-testid="card"
+  >
+    <div
+      class="sc-gEvEer cvOKXx"
+      data-testid="card-image"
+    />
+    <div
+      class="sc-eqUAAy jAJozm"
+    >
+      <h2>
+        Rick Sanchez
+      </h2>
+      <p>
+        <strong>
+          Status
+          : 
+        </strong>
+         
+        Alive
+      </p>
+      <p>
+        <strong>
+          Species
+          : 
+        </strong>
+         
+        Human
+      </p>
+      <p>
+        <strong>
+          Gender
+          : 
+        </strong>
+         
+        Male
+      </p>
+    </div>
+  </div>
+</div>
+`;

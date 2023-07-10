@@ -4,8 +4,8 @@ import * as Styled from './styles';
 
 const Card = ({ name, image, species, gender, status }: ICardProps) => {
 	return (
-		<Styled.Container>
-			<Styled.ImagContainer image={image} />
+		<Styled.Container data-testid="card">
+			<Styled.ImagContainer image={image} data-testid="card-image" />
 			<Styled.InfoContainer>
 				<h2>{name}</h2>
 				{renderData('Status', status)}
