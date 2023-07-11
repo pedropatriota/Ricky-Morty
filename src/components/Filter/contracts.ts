@@ -10,7 +10,6 @@ export type TFilterFN = (
 export interface IFilterProps {
 	filter: TFilter[];
 	options: readonly (TFilter | GroupBase<{ label: string; value: string }>)[][];
-	optionsStatus: readonly (TFilter | GroupBase<{ label: string; value: string }>)[];
 	label: string[];
 	handleFilter: TFilterFN[];
 }

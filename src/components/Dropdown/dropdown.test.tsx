@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-container */
-import { screen, render, fireEvent, waitFor } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { light } from '../../styles/themes';
 import Dropdown from '.';

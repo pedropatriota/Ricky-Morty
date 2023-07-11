@@ -1,9 +1,11 @@
 import useDetails from './useDetails';
+import { useNavigate } from 'react-router-dom';
 import { DetailList, Template } from '../../components';
 import { transformObjectToArray } from '../../utils';
 import * as Styled from './styles';
 
 const Details = () => {
+	const navigate = useNavigate();
 	const {
 		dataCharacter,
 		dataLocation,
@@ -15,8 +17,9 @@ const Details = () => {
 		episodesProps,
 		characterArr,
 		locationArr,
-		episodesArr
-	} = useDetails();
+		episodesArr,
+		handleGoBack
+	} = useDetails(navigate);
 
 	if (isLoading) return <span>Loading...</span>;
 	if (isError) return <span>Error</span>;
@@ -30,7 +33,7 @@ const Details = () => {
 	const episodes = transformObjectToArray(dataEpisode, episodesProps);
 
 	return (
-		<Template showGoBack>
+		<Template showGoBack handleGoBack={handleGoBack}>
 			<Styled.Title style={{ marginBottom: '1.5rem' }}>{name}</Styled.Title>
 			<Styled.InfoContainer
 				style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}

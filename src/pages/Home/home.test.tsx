@@ -1,5 +1,5 @@
 import { renderWithProviders } from '../../utils';
-import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen } from '@testing-library/react';
 import Home from '.';
 import { light } from '../../styles/themes';
 
@@ -99,5 +99,10 @@ describe('Home', () => {
 		});
 
 		expect(showNamesDescending).toHaveLength(4);
+	});
+
+	it('should match the snapshot', () => {
+		const { container } = renderWithProviders(<Home />, light);
+		expect(container).toMatchSnapshot();
 	});
 });

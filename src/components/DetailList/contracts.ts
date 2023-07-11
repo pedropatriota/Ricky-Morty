@@ -1,6 +1,3 @@
-export type UnknownObject = Record<string, string | number>;
-
-export interface IDetailListProps<T extends UnknownObject> {
-	dataArr: Array<Partial<T>>;
+export interface IParams {
 	params: { label: string; value: string }[];
 }

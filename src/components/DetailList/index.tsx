@@ -1,25 +1,20 @@
 import { renderData } from '../../utils';
-import { Fragment, useId } from 'react';
+import { Fragment } from 'react';
 import { Container } from './styles';
-import type { IDetailListProps, UnknownObject } from './contracts';
+import type { IParams } from './contracts';
 
-const DetailList = ({ dataArr, params }: IDetailListProps<UnknownObject>) => {
-	const id = useId();
+const DetailList = ({ params }: IParams) => {
 	return (
 		<div>
-			{dataArr.map(() => {
-				return (
-					<Container key={id}>
-						{params?.map(({ label, value }) => {
-							return (
-								<Fragment key={value}>
-									{renderData(label, value)}
-								</Fragment>
-							);
-						})}
-					</Container>
-				);
-			})}
+			<Container>
+				{params?.map(({ label, value }, idx) => {
+					return (
+						<Fragment key={`${label}_${value}_${idx}`}>
+							{renderData(label, value)}
+						</Fragment>
+					);
+				})}
+			</Container>
 		</div>
 	);
 };

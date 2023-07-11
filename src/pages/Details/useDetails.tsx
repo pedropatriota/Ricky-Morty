@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { useParams, NavigateFunction } from 'react-router-dom';
 import { useGetById } from '../../service/hooks';
 
-const useDetails = () => {
+const useDetails = (navigate: NavigateFunction) => {
 	const { id } = useParams();
 
 	const {
@@ -50,6 +50,8 @@ const useDetails = () => {
 		{ label: 'Characters', value: dataEpisode?.characters?.length }
 	];
 
+	const handleGoBack = () => navigate(-1);
+
 	return {
 		dataCharacter,
 		dataLocation,
@@ -61,7 +63,8 @@ const useDetails = () => {
 		episodesProps,
 		characterArr,
 		locationArr,
-		episodesArr
+		episodesArr,
+		handleGoBack
 	};
 };
 

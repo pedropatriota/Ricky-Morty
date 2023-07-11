@@ -1,23 +1,24 @@
 import { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ArrowBigLeft } from 'lucide-react';
 import { Container } from './styles';
 
 interface ITemplateProps {
 	children: ReactNode;
-	showGoBack: boolean;
+	showGoBack?: boolean;
+	handleGoBack?: () => void;
 }
 
-const Template = ({ children, showGoBack }: ITemplateProps) => {
-	const navigate = useNavigate();
-
-	const goBack = () => navigate(-1);
-
+const Template = ({ children, showGoBack, handleGoBack }: ITemplateProps) => {
 	return (
-		<Container>
+		<Container data-testid="template-container">
 			{showGoBack && (
 				<div>
-					<ArrowBigLeft onClick={goBack} width="30px" />
+					<ArrowBigLeft
+						onClick={handleGoBack}
+						width="30px"
+						role="button"
+						aria-label="goback-icon"
+					/>
 				</div>
 			)}
 			{children}
