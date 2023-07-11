@@ -1,8 +1,7 @@
 import List from '.';
-import { render, screen, within } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
+import { render, screen } from '@testing-library/react';
 import { light } from '../../styles/themes';
-import { MemoryRouter } from 'react-router-dom';
+import { renderWithProviders } from '../../utils';
 
 describe('ListComponent', () => {
 	const fetchNextPage = jest.fn();
@@ -42,16 +41,13 @@ describe('ListComponent', () => {
 	});
 
 	it('should render and map the data', async () => {
-		const { debug, container } = render(
-			<ThemeProvider theme={light}>
-				<MemoryRouter>
-					<List
-						allData={[...props]}
-						fetchNextPage={fetchNextPage}
-						hasNextPage={false}
-					/>
-				</MemoryRouter>
-			</ThemeProvider>
+		renderWithProviders(
+			<List
+				allData={[...props]}
+				fetchNextPage={fetchNextPage}
+				hasNextPage={false}
+			/>,
+			light
 		);
 
 		const scrolledContainer = screen.getByTestId('scroller');
@@ -62,16 +58,13 @@ describe('ListComponent', () => {
 	});
 
 	it('should match the snapshot', () => {
-		const { container } = render(
-			<ThemeProvider theme={light}>
-				<MemoryRouter>
-					<List
-						allData={[...props]}
-						fetchNextPage={fetchNextPage}
-						hasNextPage={false}
-					/>
-				</MemoryRouter>
-			</ThemeProvider>
+		const { container } = renderWithProviders(
+			<List
+				allData={[...props]}
+				fetchNextPage={fetchNextPage}
+				hasNextPage={false}
+			/>,
+			light
 		);
 		expect(container).toMatchSnapshot();
 	});

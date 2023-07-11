@@ -12,7 +12,7 @@ const Filter = ({
 	label
 }: IFilterProps & IFormProps) => {
 	return (
-		<Container>
+		<Container data-testid="filter">
 			<Input
 				value={value}
 				handleChange={handleChange}

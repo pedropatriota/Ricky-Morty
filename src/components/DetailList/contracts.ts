@@ -1,4 +1,4 @@
-export type UnknownObject = Record<string, string>;
+export type UnknownObject = Record<string, string | number>;
 
 export interface IDetailListProps<T extends UnknownObject> {
 	dataArr: Array<Partial<T>>;
