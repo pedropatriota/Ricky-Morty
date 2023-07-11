@@ -1,5 +1,5 @@
-import { renderData } from '../../utils';
 import { Fragment } from 'react';
+import { renderData } from '../../utils';
 import { Container } from './styles';
 import type { IParams } from './contracts';
 
