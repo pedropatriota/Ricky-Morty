@@ -15,8 +15,8 @@ For this project, I've used two endpoints:
 - https://rickandmortyapi.com/api/location/:id (Details page)
 - https://rickandmortyapi.com/api/epsideo/:id (Details page)
 
-I choose react-query to handle these requests. I created custom hooks, and whole logic regarding filtering and sorting ware developed using the select property provided by react query.
-For the Home page I used useInfiniteQuery, where while the window was scrolling down, the next page was fetched.
+  I choose react-query to handle these requests. I created custom hooks, and whole logic regarding filtering and sorting ware developed using the select property provided by react query.
+  For the Home page I used useInfiniteQuery, where while the window was scrolling down, the next page was fetched.
 ---
 
 **Testing**
