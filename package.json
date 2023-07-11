@@ -58,6 +58,7 @@
     "@types/react-select": "^5.0.1",
     "@types/styled-components": "^5.1.26",
     "eslint-config-prettier": "^8.5.0",
+    "msw": "^1.2.2",
     "prettier": "^2.7.1"
   }
 }
