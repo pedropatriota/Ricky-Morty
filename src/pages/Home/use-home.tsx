@@ -1,29 +1,17 @@
 import { startTransition, useCallback, useMemo, useState } from 'react';
 import { useLoadMoreAllData } from '../../service/hooks';
-import { SingleValue } from 'react-select';
-
-interface ISelect {
-	gender: SingleValue<{ label: string | null; value: string | null }>;
-	status: SingleValue<{ label: string | null; value: string | null }>;
-}
-
-type TOrder = 'Ascending' | 'Descending' | undefined;
+import type { ISelect, TOrder, TSelected } from './contracts';
 
 const useHome = () => {
 	const RESOURCE = 'character';
+
 	const [filters, setFilters] = useState<{
 		name: string;
 		gender: 'Male' | 'Female' | 'Unknown' | string;
 		status: 'Alive' | 'Dead' | 'Unknown' | string;
 	}>({ name: '', gender: '', status: '' });
-	const [order, setOrder] = useState<TOrder>();
 
-	const { allData, fetchNextPage, hasNextPage, isLoading, isError, error } =
-		useLoadMoreAllData({
-			resource: RESOURCE,
-			filters,
-			order
-		});
+	const [order, setOrder] = useState<TOrder>();
 
 	const [inputValue, setInputValue] = useState('');
 
@@ -31,6 +19,13 @@ const useHome = () => {
 		gender: { label: '', value: null },
 		status: { label: '', value: null }
 	});
+
+	const { allData, fetchNextPage, hasNextPage, isLoading, isError, error } =
+		useLoadMoreAllData({
+			resource: RESOURCE,
+			filters,
+			order
+		});
 
 	const genderOptions = useMemo(
 		() => [
@@ -50,13 +45,13 @@ const useHome = () => {
 		[]
 	);
 
-	const handleOrder = () => {
+	const handleOrder = useCallback(() => {
 		setOrder((prevOrder: TOrder): TOrder => {
 			if (!prevOrder) return 'Ascending';
 			else if (prevOrder === 'Ascending') return 'Descending';
 			else return undefined;
 		});
-	};
+	}, []);
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
@@ -65,10 +60,7 @@ const useHome = () => {
 	};
 
 	const handleSelect = useCallback(
-		(
-			newValue: SingleValue<{ label: string; value: string }> | any,
-			propertyName: string
-		) => {
+		(newValue: TSelected | any, propertyName: string) => {
 			setSelect(newValue);
 			startTransition(() =>
 				setFilters({ ...filters, [propertyName]: newValue?.value as string })
@@ -89,12 +81,8 @@ const useHome = () => {
 		statusOptions,
 		inputValue,
 		handleInputChange,
-		handleFilterGender: (
-			value: SingleValue<{ label: string; value: string }> | any
-		) => handleSelect(value, 'gender'),
-		handleFilterStatus: (
-			value: SingleValue<{ label: string; value: string }> | any
-		) => handleSelect(value, 'status'),
+		handleFilterGender: (value: TSelected | any) => handleSelect(value, 'gender'),
+		handleFilterStatus: (value: TSelected | any) => handleSelect(value, 'status'),
 		handleSelect,
 		select,
 		handleOrder,

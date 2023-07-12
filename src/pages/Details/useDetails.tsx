@@ -1,5 +1,6 @@
 import { useParams, NavigateFunction } from 'react-router-dom';
 import { useGetById } from '../../service/hooks';
+import { useCallback, useMemo } from 'react';
 
 const useDetails = (navigate: NavigateFunction) => {
 	const { id } = useParams();
@@ -7,7 +8,8 @@ const useDetails = (navigate: NavigateFunction) => {
 	const {
 		dataById: dataCharacter,
 		isLoading: isLoadingCharacter,
-		isError: isErrorCharacter
+		isError: isErrorCharacter,
+		isFetching
 	} = useGetById({ resource: 'character', id: Number(id) });
 
 	const {
@@ -22,35 +24,63 @@ const useDetails = (navigate: NavigateFunction) => {
 		isError: isErrorEpisode
 	} = useGetById({ resource: 'episode', id: Number(id) });
 
-	const characterProps = ['id', 'name', 'image', 'species', 'status', 'gender'];
-	const locationProps = ['id', 'dimension', 'type', 'name', 'residents'];
-	const episodesProps = ['id', 'air_date', 'characters', 'name', 'episode'];
-
 	const isLoading = isLoadingCharacter || isLoadingLocation || isLoadingEpisode;
 	const isError = isErrorCharacter || isErrorLocation || isErrorEpisode;
 
-	const characterArr = [
-		{ label: 'Species', value: dataCharacter?.species },
-		{ label: 'Status', value: dataCharacter?.status },
-		{ label: 'Gender', value: dataCharacter?.gender }
-	];
+	const characterProps = useMemo(
+		() => ['id', 'name', 'image', 'species', 'status', 'gender'],
+		[]
+	);
+	const locationProps = useMemo(
+		() => ['id', 'dimension', 'type', 'name', 'residents'],
+		[]
+	);
+	const episodesProps = useMemo(
+		() => ['id', 'air_date', 'characters', 'name', 'episode'],
+		[]
+	);
 
-	const locationArr = [
-		{ label: 'Dimension', value: dataLocation?.dimension },
-		{ label: 'Location', value: `${dataLocation?.type} - ${dataLocation?.name}` },
-		{ label: 'Residents', value: dataLocation?.residents?.length }
-	];
+	const characterArr = useMemo(
+		() => [
+			{ label: 'Species', value: dataCharacter?.species },
+			{ label: 'Status', value: dataCharacter?.status },
+			{ label: 'Gender', value: dataCharacter?.gender }
+		],
+		[dataCharacter?.gender, dataCharacter?.species, dataCharacter?.status]
+	);
 
-	const episodesArr = [
-		{
-			label: 'First Episode',
-			value: `${dataEpisode?.name} - ${dataEpisode?.episode}`
-		},
-		{ label: 'Date', value: dataEpisode?.air_date },
-		{ label: 'Characters', value: dataEpisode?.characters?.length }
-	];
+	const locationArr = useMemo(
+		() => [
+			{ label: 'Dimension', value: dataLocation?.dimension },
+			{ label: 'Location', value: `${dataLocation?.type} - ${dataLocation?.name}` },
+			{ label: 'Residents', value: dataLocation?.residents?.length }
+		],
+		[
+			dataLocation?.dimension,
+			dataLocation?.name,
+			dataLocation?.residents?.length,
+			dataLocation?.type
+		]
+	);
 
-	const handleGoBack = () => navigate(-1);
+	const episodesArr = useMemo(
+		() => [
+			{
+				label: 'First Episode',
+				value: `${dataEpisode?.name} - ${dataEpisode?.episode}`
+			},
+			{ label: 'Date', value: dataEpisode?.air_date },
+			{ label: 'Characters', value: dataEpisode?.characters?.length }
+		],
+		[
+			dataEpisode?.air_date,
+			dataEpisode?.characters?.length,
+			dataEpisode?.episode,
+			dataEpisode?.name
+		]
+	);
+
+	const handleGoBack = useCallback(() => navigate(-1), [navigate]);
 
 	return {
 		dataCharacter,
@@ -64,7 +94,8 @@ const useDetails = (navigate: NavigateFunction) => {
 		characterArr,
 		locationArr,
 		episodesArr,
-		handleGoBack
+		handleGoBack,
+		isFetching
 	};
 };
 

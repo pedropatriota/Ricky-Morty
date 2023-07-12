@@ -6,5 +6,16 @@ import List from './List';
 import DetailList from './DetailList';
 import Template from './Template';
 import Order from './Order';
+import Spinner from './Spinner';
 
-export { Character, Header, TFilter as Filter, Card, List, DetailList, Template, Order };
+export {
+	Character,
+	Header,
+	TFilter as Filter,
+	Card,
+	List,
+	DetailList,
+	Template,
+	Order,
+	Spinner
+};

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import useHome from './use-home';
-import { Filter, List, Template, Order } from '../../components';
+import { Filter, List, Template, Order, Spinner } from '../../components';
 
 const Home = () => {
 	const {
@@ -21,7 +21,7 @@ const Home = () => {
 		order
 	} = useHome();
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return <Spinner />;
 	if (isError) return <div>{error?.toString()}</div>;
 
 	return (

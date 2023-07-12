@@ -1,6 +1,6 @@
 import useDetails from './useDetails';
 import { useNavigate } from 'react-router-dom';
-import { DetailList, Template } from '../../components';
+import { DetailList, Template, Spinner } from '../../components';
 import { transformObjectToArray } from '../../utils';
 import * as Styled from './styles';
 
@@ -18,10 +18,11 @@ const Details = () => {
 		characterArr,
 		locationArr,
 		episodesArr,
-		handleGoBack
+		handleGoBack,
+		isFetching
 	} = useDetails(navigate);
 
-	if (isLoading) return <span>Loading...</span>;
+	if (isLoading || isFetching) return <Spinner />;
 	if (isError) return <span>Error</span>;
 
 	const { name, image } = dataCharacter;
