@@ -1,5 +1,8 @@
 # Welcome to Appspace React FE Challenge
 
+**Deploy**
+- https://rick-morty-appspace.netlify.app/
+
 
 ### Decisions:
 
