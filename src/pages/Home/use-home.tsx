@@ -1,24 +1,21 @@
-import { startTransition, useCallback, useMemo, useState } from 'react';
+import { startTransition, useCallback, useMemo, useState, useContext } from 'react';
+import { FilterContext } from '../../context/filter';
 import { useLoadMoreAllData } from '../../service/hooks';
-import type { ISelect, TOrder, TSelected } from './contracts';
+import type { TOrder, TSelected } from './contracts';
 
 const useHome = () => {
 	const RESOURCE = 'character';
 
-	const [filters, setFilters] = useState<{
-		name: string;
-		gender: 'Male' | 'Female' | 'Unknown' | string;
-		status: 'Alive' | 'Dead' | 'Unknown' | string;
-	}>({ name: '', gender: '', status: '' });
-
-	const [order, setOrder] = useState<TOrder>();
-
-	const [inputValue, setInputValue] = useState('');
-
-	const [select, setSelect] = useState<ISelect>({
-		gender: { label: '', value: null },
-		status: { label: '', value: null }
-	});
+	const {
+		filters,
+		setFilters,
+		select,
+		setSelect,
+		inputValue,
+		setInputValue,
+		order,
+		setOrder
+	} = useContext(FilterContext);
 
 	const { allData, fetchNextPage, hasNextPage, isLoading, isError, error } =
 		useLoadMoreAllData({
@@ -51,7 +48,7 @@ const useHome = () => {
 			else if (prevOrder === 'Ascending') return 'Descending';
 			else return undefined;
 		});
-	}, []);
+	}, [setOrder]);
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
@@ -61,12 +58,12 @@ const useHome = () => {
 
 	const handleSelect = useCallback(
 		(newValue: TSelected | any, propertyName: string) => {
-			setSelect(newValue);
+			setSelect({ ...select, [propertyName]: newValue });
 			startTransition(() =>
 				setFilters({ ...filters, [propertyName]: newValue?.value as string })
 			);
 		},
-		[filters]
+		[filters, select, setFilters, setSelect]
 	);
 
 	return {

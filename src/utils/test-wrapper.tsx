@@ -2,6 +2,7 @@ import { QueryClientProvider, QueryClient } from 'react-query';
 import { render, RenderResult } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { MemoryRouter } from 'react-router-dom';
+import FilterProvider from '../context/filter';
 import { ReactElement } from 'react';
 
 export interface DefaultTheme {
@@ -29,7 +30,9 @@ export const renderWithProviders = (
 	return render(
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider theme={theme}>
-				<MemoryRouter>{ui}</MemoryRouter>
+				<FilterProvider>
+					<MemoryRouter>{ui}</MemoryRouter>
+				</FilterProvider>
 			</ThemeProvider>
 		</QueryClientProvider>
 	);

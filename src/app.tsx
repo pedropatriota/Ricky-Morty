@@ -5,6 +5,7 @@ import { queryClient } from './service/query-client';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import GlobalStyles from './styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
+import FilterProvider from './context/filter';
 import { light, dark } from './styles/themes';
 import { Header } from './components';
 
@@ -19,7 +20,9 @@ const App = () => {
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider theme={theme}>
 				<Header theme={theme} toggleTheme={toggleTheme} />
-				<Router />
+				<FilterProvider>
+					<Router />
+				</FilterProvider>
 				<GlobalStyles />
 			</ThemeProvider>
 			<ReactQueryDevtools />
