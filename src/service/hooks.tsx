@@ -4,8 +4,12 @@ import { InfiniteData, useInfiniteQuery, useQuery } from 'react-query';
 
 export const useGetById = ({ resource, id }: getRequestProps) => {
 	const fallback = 'loading';
-	const { data = fallback, ...params } = useQuery([queryKeys.byId, resource], () =>
-		getById({ resource, id })
+	const { data = fallback, ...params } = useQuery(
+		[queryKeys.byId, resource],
+		() => getById({ resource, id }),
+		{
+			refetchOnWindowFocus: false
+		}
 	);
 
 	return { dataById: data, ...params };
@@ -55,6 +59,7 @@ export const useLoadMoreAllData = ({ resource, filters, order }: getRequestProps
 		({ pageParam = `${baseUrl}/${resource}` }) => fetcher({ url: pageParam }),
 		{
 			cacheTime: Infinity,
+			refetchOnMount: false,
 			refetchOnWindowFocus: false,
 			getNextPageParam: lastPage => {
 				return lastPage.info.next || undefined;
